@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0f172a" />
     <meta
       name="description"
       content="Yoyal Limbu - PHP/Laravel Developer Portfolio"
     />
     <title>Yoyal Limbu - Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // Prevent flash of light theme by setting dark theme immediately
+      (function() {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (!savedTheme) {
+          localStorage.setItem('portfolio-theme', 'dark');
+        }
+        document.documentElement.setAttribute('data-theme', savedTheme || 'dark');
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

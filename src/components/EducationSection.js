@@ -219,38 +219,23 @@ const EducationSection = () => {
   };
 
   return (
-    <div className="api-section">
+    <div className="api-section" id="education-section">
       <div className="api-header">
         <h2>GET /api/education</h2>
         <p>Retrieve educational background and qualifications</p>
       </div>
       <div className="api-content">
         <div className="request-panel">
-          <button
-            className="api-request-button"
-            onClick={simulateApiRequest}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                Fetching Data
-                <span className="loading-indicator"></span>
-              </>
-            ) : (
-              'Fetch Education Data'
-            )}
-          </button>
-          
           <div className="param-group">
             <h4>Headers</h4>
             <div className="param-item">
               <span className="param-key">Authorization</span>
-              <span className="param-value">Bearer token</span>
+              <span className="param-value" title="Bearer token">Bearer token</span>
               <span className="param-type">string</span>
             </div>
             <div className="param-item">
               <span className="param-key">Content-Type</span>
-              <span className="param-value">application/json</span>
+              <span className="param-value" title="application/json">application/json</span>
               <span className="param-type">string</span>
             </div>
           </div>
@@ -259,12 +244,12 @@ const EducationSection = () => {
             <h4>Query Parameters</h4>
             <div className="param-item">
               <span className="param-key">include_certificates</span>
-              <span className="param-value">true</span>
+              <span className="param-value" title="true">true</span>
               <span className="param-type">boolean</span>
             </div>
             <div className="param-item">
               <span className="param-key">sort_by</span>
-              <span className="param-value">graduation_year</span>
+              <span className="param-value" title="graduation_year">graduation_year</span>
               <span className="param-type">string</span>
             </div>
           </div>
@@ -273,14 +258,30 @@ const EducationSection = () => {
             <h4>Response Format</h4>
             <div className="param-item">
               <span className="param-key">format</span>
-              <span className="param-value">json</span>
+              <span className="param-value" title="json">json</span>
               <span className="param-type">string</span>
             </div>
           </div>
         </div>
         
         <div className="response-panel">
-          <div className="panel-title">Response</div>
+          <div className="panel-title">
+            Response
+            <button
+              className="api-request-button"
+              onClick={simulateApiRequest}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  Fetching Data
+                  <span className="loading-indicator"></span>
+                </>
+              ) : (
+                'Fetch Education Data'
+              )}
+            </button>
+          </div>
           
           {!showResponse ? (
             <div className="json-display" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888', fontStyle: 'italic' }}>

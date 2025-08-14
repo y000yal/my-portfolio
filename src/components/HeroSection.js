@@ -3,7 +3,7 @@ import { FiPhone, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi';
 
 const HeroSection = () => {
   return (
-    <div className="hero-section">
+    <div className="hero-section" id="hero-section">
       <div className="hero-content">
         <h1>Yoyal Limbu</h1>
         <h2>Senior PHP Developer</h2>
@@ -19,10 +19,10 @@ const HeroSection = () => {
           <a href="mailto:yoyal.limbu@gmail.com">
             <FiMail /> Email
           </a>
-          <a href="https://github.com/yoyallimbu" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/y000yal" target="_blank" rel="noopener noreferrer">
             <FiGithub /> GitHub
           </a>
-          <a href="https://linkedin.com/in/yoyallimbu" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/yoyal-limbu/" target="_blank" rel="noopener noreferrer">
             <FiLinkedin /> LinkedIn
           </a>
         </div>

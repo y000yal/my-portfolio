@@ -5,17 +5,23 @@ import EducationSection from './components/EducationSection';
 import SkillsSection from './components/SkillsSection';
 import ContactSection from './components/ContactSection';
 import ThemeToggle from './components/ThemeToggle';
+import Navigation from './components/Navigation';
 
 function App() {
   const [isSimulatingAll, setIsSimulatingAll] = useState(false);
   const [theme, setTheme] = useState('dark');
 
-  // Load theme from localStorage on component mount
+  // Load theme from localStorage on component mount, default to dark
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme');
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      // Set default dark theme if no saved theme exists
+      setTheme('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('portfolio-theme', 'dark');
     }
   }, []);
 
@@ -42,6 +48,7 @@ function App() {
   return (
     <div className="App">
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <Navigation />
       <HeroSection />
       <div className="container">
         <div style={{ textAlign: 'center', margin: '40px 0' }}>
@@ -57,7 +64,7 @@ function App() {
                 <span className="loading-indicator"></span>
               </>
             ) : (
-              '🚀 Fetch All Portfolio Data'
+              'Fetch All Portfolio Data'
             )}
           </button>
           <p style={{ color: 'var(--text-muted)', marginTop: '15px', fontSize: '0.9rem' }}>

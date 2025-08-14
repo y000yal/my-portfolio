@@ -206,38 +206,23 @@ const ExperienceSection = () => {
   };
 
   return (
-    <div className="api-section">
+    <div className="api-section" id="experience-section">
       <div className="api-header">
         <h2>GET /api/experience</h2>
         <p>Retrieve professional work experience data</p>
       </div>
       <div className="api-content">
         <div className="request-panel">
-          <button
-            className="api-request-button"
-            onClick={simulateApiRequest}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                Fetching Data
-                <span className="loading-indicator"></span>
-              </>
-            ) : (
-              'Fetch Experience Data'
-            )}
-          </button>
-          
           <div className="param-group">
             <h4>Headers</h4>
             <div className="param-item">
               <span className="param-key">Authorization</span>
-              <span className="param-value">Bearer token</span>
+              <span className="param-value" title="Bearer token">Bearer token</span>
               <span className="param-type">string</span>
             </div>
             <div className="param-item">
               <span className="param-key">Content-Type</span>
-              <span className="param-value">application/json</span>
+              <span className="param-value" title="application/json">application/json</span>
               <span className="param-type">string</span>
             </div>
           </div>
@@ -246,12 +231,12 @@ const ExperienceSection = () => {
             <h4>Query Parameters</h4>
             <div className="param-item">
               <span className="param-key">limit</span>
-              <span className="param-value">10</span>
+              <span className="param-value" title="10">10</span>
               <span className="param-type">number</span>
             </div>
             <div className="param-item">
               <span className="param-key">sort</span>
-              <span className="param-value">date_desc</span>
+              <span className="param-value" title="date_desc">date_desc</span>
               <span className="param-type">string</span>
             </div>
           </div>
@@ -260,14 +245,30 @@ const ExperienceSection = () => {
             <h4>Response Format</h4>
             <div className="param-item">
               <span className="param-key">format</span>
-              <span className="param-value">json</span>
+              <span className="param-value" title="json">json</span>
               <span className="param-type">string</span>
             </div>
           </div>
         </div>
         
         <div className="response-panel">
-          <div className="panel-title">Response</div>
+          <div className="panel-title">
+            Response
+            <button
+              className="api-request-button"
+              onClick={simulateApiRequest}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  Fetching Data
+                  <span className="loading-indicator"></span>
+                </>
+              ) : (
+                'Fetch Experience Data'
+              )}
+            </button>
+          </div>
           
           {!showResponse ? (
             <div className="json-display" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888', fontStyle: 'italic' }}>
