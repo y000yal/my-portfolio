@@ -26,15 +26,18 @@ const ContactSection = () => {
     setError('');
 
     try {
-      // Netlify Forms will handle the submission automatically
-      // We just need to encode the form data properly
-      const formDataEncoded = new FormData(e.target);
-      
-      // Submit to Netlify Forms
-      const response = await fetch('/', {
+      // Submit to Formspree
+      const response = await fetch('https://formspree.io/f/xrblwgop', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataEncoded).toString()
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
 
       if (response.ok) {
@@ -129,12 +132,9 @@ const ContactSection = () => {
             <form 
               className="contact-form" 
               onSubmit={handleSubmit}
-              data-netlify="true"
-              name="contact"
+              action="https://formspree.io/f/YOUR_FORM_ID"
               method="POST"
             >
-              <input type="hidden" name="form-name" value="contact" />
-              
               <div className="form-group">
                 <label htmlFor="name">Name *</label>
                 <input
@@ -194,7 +194,7 @@ const ContactSection = () => {
                   <FiCheckCircle />
                   <span>Message sent successfully! I'll get back to you soon.</span>
                 </div>
-                )}
+              )}
               
               <button 
                 type="submit" 
