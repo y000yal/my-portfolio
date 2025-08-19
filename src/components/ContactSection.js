@@ -26,25 +26,25 @@ const ContactSection = () => {
     setError('');
 
     try {
-      // Using EmailJS service to send emails
-      // You'll need to set up EmailJS account and get service ID, template ID, and user ID
-      const emailData = {
-        to_email: 'yoyal.limbu@gmail.com',
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      };
+      // Netlify Forms will handle the submission automatically
+      // We just need to encode the form data properly
+      const formDataEncoded = new FormData(e.target);
+      
+      // Submit to Netlify Forms
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataEncoded).toString()
+      });
 
-      // For now, we'll simulate the email sending
-      // In production, you would integrate with EmailJS or similar service
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-      
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error('Form submission failed');
+      }
       
     } catch (err) {
       setError('Failed to send message. Please try again or contact directly via email.');
@@ -126,7 +126,15 @@ const ContactSection = () => {
           </div>
 
           <div className="contact-form-container">
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <form 
+              className="contact-form" 
+              onSubmit={handleSubmit}
+              data-netlify="true"
+              name="contact"
+              method="POST"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              
               <div className="form-group">
                 <label htmlFor="name">Name *</label>
                 <input
@@ -186,8 +194,8 @@ const ContactSection = () => {
                   <FiCheckCircle />
                   <span>Message sent successfully! I'll get back to you soon.</span>
                 </div>
-              )}
-
+                )}
+              
               <button 
                 type="submit" 
                 className="submit-button"
