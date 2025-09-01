@@ -57,7 +57,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   max-width: 100%;
   width: 100%;
@@ -412,19 +413,12 @@ body {
 
 /* Floating Background Shapes */
 
-
-
-
-
-
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 800px;
   padding: 0 20px;
 }
-
-
 
 .hero-content h1 {
   font-size: clamp(3rem, 8vw, 5rem);
@@ -435,8 +429,6 @@ body {
   animation: fadeInUp 1s ease-out;
 }
 
-
-
 .hero-content h2 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 600;
@@ -445,8 +437,6 @@ body {
   animation: fadeInUp 1s ease-out 0.2s both;
 }
 
-
-
 .hero-content p {
   font-size: clamp(1.1rem, 3vw, 1.3rem);
   margin-bottom: 2.5rem;
@@ -454,10 +444,6 @@ body {
   line-height: 1.7;
   animation: fadeInUp 1s ease-out 0.4s both;
 }
-
-
-
-
 
 .social-links {
   display: flex;
@@ -493,8 +479,6 @@ body {
   width: 20px;
   height: 20px;
 }
-
-
 
 /* Enhanced API Section Styles */
 .panel-header {
@@ -545,7 +529,8 @@ body {
   color: var(--text-primary);
 }
 
-.param-input, .param-select {
+.param-input,
+.param-select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #555;
@@ -554,16 +539,18 @@ body {
   color: #ffffff;
   font-size: 0.9rem;
   transition: all 0.2s ease;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.param-input:focus, .param-select:focus {
+.param-input:focus,
+.param-select:focus {
   outline: none;
   border-color: #ff6b35;
   box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
 }
 
-.param-input:hover, .param-select:hover {
+.param-input:hover,
+.param-select:hover {
   border-color: #777;
 }
 
@@ -666,7 +653,7 @@ body {
 .url-display {
   display: flex;
   align-items: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.85rem;
   line-height: 1.4;
   word-break: break-all;
@@ -729,7 +716,7 @@ body {
   width: auto;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   min-width: 120px;
 }
 
@@ -785,7 +772,7 @@ body {
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .api-section:hover {
@@ -809,7 +796,7 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   color: #ff6b35;
   display: flex;
   align-items: center;
@@ -855,7 +842,7 @@ body {
 }
 
 .scroll-next::before {
-  content: '↓';
+  content: "↓";
   font-size: 18px;
   color: #ff6b35;
   line-height: 1;
@@ -869,9 +856,18 @@ body {
 }
 
 @keyframes nextBounce {
-  0% { transform: translateY(-2px); opacity: 0.9; }
-  50% { transform: translateY(2px); opacity: 0.6; }
-  100% { transform: translateY(-2px); opacity: 0.9; }
+  0% {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(2px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
 }
 
 /* Back to top floating button */
@@ -892,7 +888,8 @@ body {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
   z-index: 1000;
 }
 
@@ -925,7 +922,8 @@ body {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
   z-index: 1000;
 }
 
@@ -1246,7 +1244,7 @@ body {
   transition: all 0.2s ease;
   font-size: 0.85rem;
   font-weight: 500;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .view-toggle button.active,
@@ -1585,8 +1583,6 @@ pre {
   }
 }
 
-
-
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out;
 }
@@ -1632,8 +1628,6 @@ pre {
     font-size: 2rem;
   }
 
-
-
   .contact-content {
     gap: 3rem;
   }
@@ -1647,7 +1641,7 @@ pre {
     min-width: 120px;
     position: relative;
   }
-  
+
   /* Make button text just "Fetch" for medium tablets */
   .api-request-button::before {
     content: "Fetch";
@@ -1661,17 +1655,17 @@ pre {
     white-space: nowrap;
     z-index: 1;
   }
-  
+
   /* Completely hide the original button content using multiple approaches */
   .api-request-button > * {
     display: none !important;
   }
-  
+
   .api-request-button {
     font-size: 0 !important;
     color: transparent !important;
   }
-  
+
   .api-request-button .loading-indicator {
     margin-left: 0;
   }
@@ -1689,8 +1683,6 @@ pre {
   .hero-content h2 {
     font-size: 1.8rem;
   }
-
-
 
   .social-links {
     flex-direction: column;
@@ -1714,7 +1706,8 @@ pre {
     margin-bottom: 1.5rem;
   }
 
-  .param-input, .param-select {
+  .param-input,
+  .param-select {
     padding: 0.8rem;
     font-size: 1rem;
   }
@@ -1726,8 +1719,9 @@ pre {
   }
 
   .url-display {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
     padding-right: 0;
     padding-bottom: 2.5rem;
     gap: 5px;
@@ -2226,7 +2220,7 @@ pre {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
-  
+
   /* Make button text just "Fetch" for very small screens */
   .api-request-button {
     font-size: 0.85rem;
@@ -2234,7 +2228,7 @@ pre {
     min-width: 120px;
     position: relative;
   }
-  
+
   /* Use ::before pseudo-element to show "Fetch" */
   .api-request-button::before {
     content: "Fetch";
@@ -2248,17 +2242,17 @@ pre {
     white-space: nowrap;
     z-index: 1;
   }
-  
+
   /* Completely hide the original button content */
   .api-request-button > * {
     display: none !important;
   }
-  
+
   .api-request-button {
     font-size: 0 !important;
     color: transparent !important;
   }
-  
+
   .api-request-button .loading-indicator {
     margin-left: 0;
   }
@@ -2698,4 +2692,3 @@ a:focus {
   transition: none;
   animation: none;
 }
-
