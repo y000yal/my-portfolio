@@ -11,6 +11,45 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  // Blacklist of disposable/temporary email domains
+  const disposableEmailDomains = [
+    '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 'tempmail.org',
+    'throwaway.email', 'mailnesia.com', 'sharklasers.com', 'getairmail.com',
+    'yopmail.com', 'temp-mail.org', 'fakeinbox.com', 'maildrop.cc',
+    'tempr.email', 'dispostable.com', 'mailmetrash.com', 'trashmail.com',
+    'spam4.me', 'bccto.me', 'chacuo.net', 'dispostable.com',
+    'fakeinbox.net', 'guerrillamailblock.com', 'mailcatch.com', 'mailnesia.com',
+    'mintemail.com', 'mohmal.com', 'mytrashmail.com', 'nwldx.com',
+    'sharklasers.com', 'spam4.me', 'tempr.email', 'throwaway.email',
+    'yopmail.com', 'yopmail.net', 'yopmail.org', 'yopmail.info',
+    'cool.fr.nf', 'jetable.fr.nf', 'nospam.ze.tc', 'nomail.xl.cx',
+    'mega.zik.dj', 'speed.1s.fr', 'courriel.fr.nf', 'moncourrier.fr.nf',
+    'monemail.fr.nf', 'monmail.fr.nf', 'temporary.net', 'temporary.org',
+    'temporary.com', 'temporary.net', 'temporary.org', 'temporary.com'
+  ];
+
+  const validateEmail = (email) => {
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address';
+    }
+
+    // Check for disposable email domains
+    const domain = email.split('@')[1].toLowerCase();
+    if (disposableEmailDomains.includes(domain)) {
+      return 'Disposable email addresses are not allowed. Please use a valid email address.';
+    }
+
+    // Check for common spam patterns
+    if (email.includes('noreply') || email.includes('no-reply')) {
+      return 'Please use a valid email address where we can reply to you.';
+    }
+
+    return '';
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +57,31 @@ const ContactSection = () => {
       ...prev,
       [name]: value
     }));
+
+    // Clear email error when user starts typing
+    if (name === 'email') {
+      setEmailError('');
+    }
+  };
+
+  const handleEmailBlur = (e) => {
+    const email = e.target.value;
+    if (email) {
+      const emailValidationError = validateEmail(email);
+      setEmailError(emailValidationError);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate email before submission
+    const emailValidationError = validateEmail(formData.email);
+    if (emailValidationError) {
+      setEmailError(emailValidationError);
+      return;
+    }
+
     setIsSubmitting(true);
     setError('');
 
@@ -156,9 +216,12 @@ const ContactSection = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  onBlur={handleEmailBlur}
                   required
                   placeholder="your.email@example.com"
+                  className={emailError ? 'error' : ''}
                 />
+                {emailError && <div className="field-error">{emailError}</div>}
               </div>
 
               <div className="form-group">
