@@ -8,7 +8,6 @@ const Navigation = () => {
   const navItems = [
     { id: 'home', label: 'Home', icon: <FiHome />, target: 'hero-section' },
     { id: 'experience', label: 'Experience', icon: <FiBriefcase />, target: 'experience-section' },
-    { id: 'education', label: 'Education', icon: <FiBook />, target: 'education-section' },
     { id: 'skills', label: 'Skills', icon: <FiCode />, target: 'skills-section' },
     { id: 'contact', label: 'Contact', icon: <FiMail />, target: 'contact-section' }
   ];

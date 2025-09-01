@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { tomorrow, ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   FiAward,
   FiSearch,
@@ -321,38 +321,39 @@ const ExperienceSection = () => {
     <div className="api-section" id="experience-section">
       <div className="api-header">
         <div className="url-builder-container">
-          <h4>Live API URL</h4>
           <div className="url-builder">
-                         <div className="url-display">
-               <span className="url-method">GET</span>
-               <span className="url-base">
+            <div className="url-display">
+              <span className="url-method">GET</span>
+              <span className="url-base">
                 /api/experience
                 <span className="url-params">
-                {(() => {
-                  const params = [];
-                  if (apiParams.search)
-                    params.push(
-                      `search=${encodeURIComponent(apiParams.search)}`
-                    );
-                  if (apiParams.category !== "all")
-                    params.push(
-                      `category=${encodeURIComponent(apiParams.category)}`
-                    );
-                  if (apiParams.sort !== "date_desc")
-                    params.push(`sort=${encodeURIComponent(apiParams.sort)}`);
-                  if (apiParams.limit !== 10)
-                    params.push(`limit=${apiParams.limit}`);
-                  if (!apiParams.include_achievements)
-                    params.push("include_achievements=false");
-                  return params.length > 0 ? `?${params.join("&")}` : "";
-                })()}
+                  {(() => {
+                    const params = [];
+                    if (apiParams.search)
+                      params.push(
+                        `search=${encodeURIComponent(apiParams.search)}`
+                      );
+                    if (apiParams.category !== "all")
+                      params.push(
+                        `category=${encodeURIComponent(apiParams.category)}`
+                      );
+                    if (apiParams.sort !== "date_desc")
+                      params.push(`sort=${encodeURIComponent(apiParams.sort)}`);
+                    if (apiParams.limit !== 10)
+                      params.push(`limit=${apiParams.limit}`);
+                    if (!apiParams.include_achievements)
+                      params.push("include_achievements=false");
+                    return params.length > 0 ? `?${params.join("&")}` : "";
+                  })()}
+                </span>
               </span>
-               </span>
-               
             </div>
           </div>
         </div>
-        <p>Retrieve professional experience data with customizable parameters</p>
+        <p>
+          Retrieve professional experience data with customizable parameters
+        </p>
+        
       </div>
 
       <div className="api-content">
@@ -427,11 +428,12 @@ const ExperienceSection = () => {
                 }
                 className="param-select"
               >
+                <option value={1}>1 result</option>
+                <option value={2}>2 results</option>
+                <option value={3}>3 results</option>
+                <option value={4}>4 results</option>
                 <option value={5}>5 results</option>
                 <option value={10}>10 results</option>
-                <option value={15}>15 results</option>
-                <option value={20}>20 results</option>
-                <option value={50}>50 results</option>
               </select>
             </div>
           </div>
@@ -524,7 +526,7 @@ const ExperienceSection = () => {
               {viewMode === "raw" ? (
                 <SyntaxHighlighter
                   language="json"
-                  style={tomorrow}
+                  style={document.documentElement.getAttribute('data-theme') === 'light' ? ghcolors : tomorrow}
                   customStyle={{
                     background: "var(--bg-card)",
                     borderRadius: "12px",

@@ -4,11 +4,12 @@ import ExperienceSection from './components/ExperienceSection';
 import SkillsSection from './components/SkillsSection';
 import ContactSection from './components/ContactSection';
 import ThemeToggle from './components/ThemeToggle';
-import Navigation from './components/Navigation';
 
 function App() {
   const [isSimulatingAll, setIsSimulatingAll] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const [showTop, setShowTop] = useState(false);
+  const [nextTarget, setNextTarget] = useState(null);
 
   // Load theme from localStorage on component mount, default to dark
   useEffect(() => {
@@ -22,6 +23,28 @@ function App() {
       document.documentElement.setAttribute('data-theme', 'dark');
       localStorage.setItem('portfolio-theme', 'dark');
     }
+  }, []);
+
+  // Show back-to-top after scrolling a bit
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      setShowTop(y > 400);
+      const ids = ['experience-section', 'skills-section', 'contact-section'];
+      let next = null;
+      for (let i = 0; i < ids.length; i++) {
+        const el = document.getElementById(ids[i]);
+        if (!el) continue;
+        const top = el.offsetTop;
+        if (top > y + 120) { // next section somewhat below current viewport top
+          next = ids[i];
+          break;
+        }
+      }
+      setNextTarget(next);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // Toggle theme function
@@ -47,7 +70,7 @@ function App() {
   return (
     <div className="App">
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <Navigation />
+      
       <HeroSection />
       <div className="container">
         <div style={{ textAlign: 'center', margin: '40px 0' }}>
@@ -74,6 +97,28 @@ function App() {
         <SkillsSection />
       </div>
       <ContactSection />
+      <button
+        type="button"
+        className={`back-to-top ${showTop ? 'visible' : ''}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </button>
+      <button
+        type="button"
+        className={`scroll-forward ${nextTarget ? 'visible' : ''}`}
+        aria-label="Scroll to next section"
+        onClick={() => {
+          if (nextTarget) {
+            const el = document.getElementById(nextTarget);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
+        title="Next section"
+      >
+        ↓
+      </button>
     </div>
   );
 }
