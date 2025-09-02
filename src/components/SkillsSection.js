@@ -21,6 +21,7 @@ import {
   FiFilter,
   FiRefreshCw,
 } from "react-icons/fi";
+import clarityService from "../utils/clarity";
 
 const SkillsSection = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,6 +106,9 @@ const SkillsSection = () => {
     setIsLoading(true);
     setShowResponse(false);
 
+    // Track API request in Clarity
+    clarityService.trackApiRequest('skills', apiParams);
+
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -119,6 +123,9 @@ const SkillsSection = () => {
       ...prev,
       [param]: value,
     }));
+    
+    // Track parameter change in Clarity
+    clarityService.trackInteraction('parameter_change', param, value);
   };
 
   const resetParams = () => {
@@ -129,6 +136,9 @@ const SkillsSection = () => {
       search: "",
       format: "json",
     });
+    
+    // Track reset action in Clarity
+    clarityService.trackInteraction('reset_parameters', 'skills', null);
   };
 
   const formatJSON = (obj) => {

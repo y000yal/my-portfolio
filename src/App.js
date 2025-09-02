@@ -4,6 +4,7 @@ import ExperienceSection from './components/ExperienceSection';
 import SkillsSection from './components/SkillsSection';
 import ContactSection from './components/ContactSection';
 import ThemeToggle from './components/ThemeToggle';
+import clarityService from './utils/clarity';
 
 function App() {
   const [isSimulatingAll, setIsSimulatingAll] = useState(false);
@@ -23,6 +24,12 @@ function App() {
       document.documentElement.setAttribute('data-theme', 'dark');
       localStorage.setItem('portfolio-theme', 'dark');
     }
+  }, []);
+
+  // Initialize Clarity on app load
+  useEffect(() => {
+    clarityService.init();
+    clarityService.trackPageView('portfolio_home');
   }, []);
 
   // Show back-to-top after scrolling a bit
@@ -53,10 +60,16 @@ function App() {
     setTheme(newTheme);
     localStorage.setItem('portfolio-theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Track theme change in Clarity
+    clarityService.trackThemeChange(newTheme);
   };
 
   const simulateAllRequests = async () => {
     setIsSimulatingAll(true);
+    
+    // Track API simulation in Clarity
+    clarityService.trackApiRequest('all_sections', { action: 'simulate_all' });
     
     // Simulate a delay for all requests
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -101,7 +114,10 @@ function App() {
         type="button"
         className={`back-to-top ${showTop ? 'visible' : ''}`}
         aria-label="Back to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          clarityService.trackScroll('top');
+        }}
       >
         ↑
       </button>
@@ -112,7 +128,10 @@ function App() {
         onClick={() => {
           if (nextTarget) {
             const el = document.getElementById(nextTarget);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              clarityService.trackScroll(nextTarget);
+            }
           }
         }}
         title="Next section"

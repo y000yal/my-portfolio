@@ -9,6 +9,7 @@ import {
   FiArrowDown,
   FiRefreshCw,
 } from "react-icons/fi";
+import clarityService from "../utils/clarity";
 
 const ExperienceSection = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -114,6 +115,9 @@ const ExperienceSection = () => {
     setIsLoading(true);
     setShowResponse(false);
 
+    // Track API request in Clarity
+    clarityService.trackApiRequest('experience', apiParams);
+
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -128,6 +132,9 @@ const ExperienceSection = () => {
       ...prev,
       [param]: value,
     }));
+    
+    // Track parameter change in Clarity
+    clarityService.trackInteraction('parameter_change', param, value);
   };
 
   const resetParams = () => {
@@ -138,6 +145,9 @@ const ExperienceSection = () => {
       category: "all",
       include_achievements: true,
     });
+    
+    // Track reset action in Clarity
+    clarityService.trackInteraction('reset_parameters', 'experience', null);
   };
 
   const formatJSON = (obj) => {
